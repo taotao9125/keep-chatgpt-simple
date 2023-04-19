@@ -13,9 +13,6 @@
   let apiUrl = '/api/auth/session';
   let timer = -1;
 
-  function getRandomNumber(threshold) {
-    return threshold + Math.ceil(Math.random() * 3)
-  }
 
   async function keepChat() {
     const res = await fetch(apiUrl);
@@ -31,30 +28,42 @@
   }
 
   document.addEventListener('visibilitychange', () => {
-     var isHidden = document.hidden;
-      if (isHidden) {
-          run(10);
-      } else {
-          run(20);
-      }
+    var isHidden = document.hidden;
+    if (isHidden) {
+      run(10);
+    } else {
+      run(20);
+    }
 
   });
 
 
 
+
+
   function run(threshold) {
     clearTimeout(timer);
-    const random = getRandomNumber(threshold);
     timer = setTimeout(async () => {
-        try {
-            await keepChat();
-            run(threshold)
-        } catch(e) {
-            console.error(e.message)
+      try {
+        await keepChat();
+        run(threshold)
+      } catch (e) {
+        console.error(e.message)
+        var iframe = document.createElement('iframe');
+        iframe.id = 'keepChat';
+        iframe.style = `height: 0px; width: 100%;`;
+        iframe.src = apiUrl;
+        document.body.appendChild(iframe);
+        iframe.onload = () => {
+          iframe.parentNode.removeChild(iframe);
+          run(threshold)
         }
+
+      }
     }, threshold * 1000)
   }
 
+  run(20);
 
 
 })();
