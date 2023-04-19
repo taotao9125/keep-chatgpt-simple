@@ -4,7 +4,7 @@ A simple userscript to keep chat.openai.com alive.
 
 ## Install
 
-- https://github.com/taotao9125rycc/keep-chatgpt-simple/raw/master/keep.user.js
+- https://github.com/taotao9125/keep-chatgpt-simple/raw/master/keep.user.js
 
 ## Inspired by
 
