@@ -14,7 +14,7 @@
   let timer = -1;
 
   function getRandomNumber(threshold) {
-    return threshold;
+    return threshold + Math.ceil(Math.random() * 3)
   }
 
   async function keepChat() {
@@ -41,6 +41,7 @@
   });
 
 
+
   function run(threshold) {
     clearTimeout(timer);
     const random = getRandomNumber(threshold);
@@ -53,6 +54,7 @@
         }
     }, threshold * 1000)
   }
+
 
 
 })();
