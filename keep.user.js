@@ -28,29 +28,18 @@
   }
 
   document.addEventListener('visibilitychange', () => {
-    var isHidden = document.hidden;
-    if (isHidden) {
-      run(10);
-    } else {
-      run(20);
-    }
-
+    run(document.hidden ? 10 : 20)
   });
-
-
-
-
 
   function run(threshold) {
     clearTimeout(timer);
     timer = setTimeout(async () => {
       try {
         await keepChat();
-        run(threshold)
+        run(threshold);
       } catch (e) {
         console.error(e.message)
-        var iframe = document.createElement('iframe');
-        iframe.id = 'keepChat';
+        const iframe = document.createElement('iframe');
         iframe.style = `height: 0px; width: 100%;`;
         iframe.src = apiUrl;
         document.body.appendChild(iframe);
